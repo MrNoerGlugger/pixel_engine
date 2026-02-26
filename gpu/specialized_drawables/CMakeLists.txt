@@ -1,6 +1,4 @@
 add_library(specialized_drawables STATIC
-    CustomText.cpp
-    CustomText.hpp
     Screen.cpp
     Screen.hpp
 )
