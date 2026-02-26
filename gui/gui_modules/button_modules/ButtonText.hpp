@@ -1,6 +1,6 @@
 #pragma once
 #include <ButtonBase.hpp>
-#include <CustomText.hpp>
+#include <Text.hpp>
 
 class ButtonText : public ButtonBase 
 {
@@ -42,6 +42,6 @@ private:
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    mutable CustomText text;           ///< text displayed by the Button
-    mutable CustomText text_selected;  ///< text displayed by the Button when selected
+    mutable Text text;           ///< text displayed by the Button
+    mutable Text text_selected;  ///< text displayed by the Button when selected
 };
