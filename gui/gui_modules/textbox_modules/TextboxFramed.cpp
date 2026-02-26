@@ -1,8 +1,11 @@
 #include "TextboxFramed.hpp"
-#include "../../../../init/Textures.hpp"
+#include "TextureSheet.hpp"
 
 ////////////////////////////////////////////////////////////
 TextboxFramed::TextboxFramed() :
+corners						(nullptr),
+edges						(nullptr),
+texture_size                ({0, 0}),
 size                        (),
 background                  (),
 frame_parts                 (),
@@ -14,6 +17,9 @@ TextboxFramed::TextboxBase  ()
 
 ////////////////////////////////////////////////////////////
 TextboxFramed::TextboxFramed(vector<ButtonBase*> buttons, const SDL_Point& pos_visual, string textbox_id, bool interactable) :
+corners						(nullptr),
+edges						(nullptr),
+texture_size                ({0, 0}),
 size                        (),
 background                  (),
 frame_parts                 (),
@@ -25,12 +31,25 @@ TextboxFramed::TextboxBase  (buttons, pos_visual, textbox_id, interactable)
 
 ////////////////////////////////////////////////////////////
 TextboxFramed::TextboxFramed(const SDL_Point& size, vector<ButtonBase*> buttons, const SDL_Point& pos_visual, string textbox_id, bool interactable) :
+corners						(nullptr),
+edges						(nullptr),
+texture_size                ({0, 0}),
 size                        (size),
 background                  (),
 frame_parts                 (),
 TextboxFramed::TextboxBase  (buttons, pos_visual, textbox_id, interactable)
 {
     
+}
+
+void TextboxFramed::set_image_paths(std::string* corners, std::string* edges) {
+	this->corners = corners;
+	this->edges = edges;
+	TextureSheet temp_sheet;
+	temp_sheet.set_image_path(corners);
+	temp_sheet.init();
+	auto parts = graphics::texture_parts_map.at(*corners);
+	texture_size = {(int)parts.begin()->w, (int)parts.begin()->h};
 }
 
 
@@ -41,14 +60,14 @@ void TextboxFramed::createTextboxFrame(const SDL_Point& size) const
 	SDL_FPoint pos{0.f, 0.f};
 	float rotation = 0.f;
 	for (int x = 0; x < size.x; x++) {
-		pos = {x * 16.f, 0.f};
+		pos = {x * texture_size.x * 1.f, 0.f};
 		rotation = 0.f;
 		if (x == 0 || x == size.x - 1) {
 			if (x == size.x - 1) {
 				rotation = 90.f;
 			}
 			TextureSheet corner;
-			corner.set_image_path(&textures::textbox_corners);
+			corner.set_image_path(corners);
 			corner.set_part(graphics::frameType);
 			corner.set_position(base_pos.x + pos.x, base_pos.y + pos.y);
 			corner.set_rotation(rotation);
@@ -56,20 +75,20 @@ void TextboxFramed::createTextboxFrame(const SDL_Point& size) const
 		}
 		else {
 			TextureSheet edge;
-			edge.set_image_path(&textures::textbox_edges);
+			edge.set_image_path(edges);
 			edge.set_part(graphics::frameType);
 			edge.set_position(base_pos.x + pos.x, base_pos.y + pos.y);
 			edge.set_rotation(rotation);
 			frame_parts.push_back(edge);
 		}
-		pos = {x * 16.f, (size.y - 1) * 16.f};
+		pos = {x * texture_size.x * 1.f, (size.y - 1) * texture_size.y * 1.f};
 		rotation = 180.f;
 		if (x == 0 || x == size.x - 1) {
 			if (x == 0) {
 				rotation = 270.f;
 			}
 			TextureSheet corner;
-			corner.set_image_path(&textures::textbox_corners);
+			corner.set_image_path(corners);
 			corner.set_part(graphics::frameType);
 			corner.set_position(base_pos.x + pos.x, base_pos.y + pos.y);
 			corner.set_rotation(rotation);
@@ -77,7 +96,7 @@ void TextboxFramed::createTextboxFrame(const SDL_Point& size) const
 		}
 		else {
 			TextureSheet edge;
-			edge.set_image_path(&textures::textbox_edges);
+			edge.set_image_path(edges);
 			edge.set_part(graphics::frameType);
 			edge.set_position(base_pos.x + pos.x, base_pos.y + pos.y);
 			edge.set_rotation(rotation);
@@ -85,18 +104,18 @@ void TextboxFramed::createTextboxFrame(const SDL_Point& size) const
 		}
 	}
 	for (int y = 1; y < size.y - 1; y++) {
-		pos = {0.f, y * 16.f};
+		pos = {0.f, y * texture_size.y * 1.f};
 		rotation = 270.f;
 		TextureSheet edge;
-		edge.set_image_path(&textures::textbox_edges);
+		edge.set_image_path(edges);
 		edge.set_part(graphics::frameType);
 		edge.set_position(base_pos.x + pos.x, base_pos.y + pos.y);
 		edge.set_rotation(rotation);
 		frame_parts.push_back(edge);
-		pos = {(size.x - 1) * 16.f, y * 16.f};
+		pos = {(size.x - 1) * texture_size.x * 1.f, y * texture_size.y * 1.f};
 		rotation = 90.f;
 		TextureSheet edge2;
-		edge2.set_image_path(&textures::textbox_edges);
+		edge2.set_image_path(edges);
 		edge2.set_part(graphics::frameType);
 		edge2.set_position(base_pos.x + pos.x, base_pos.y + pos.y);
 		edge2.set_rotation(rotation);
@@ -130,8 +149,8 @@ void TextboxFramed::ensureGeometryUpdate()
     if (!geometryNeedUpdate)
         return;
 
-    position.x += 16.f;
-    position.y += 16.f;
+    position.x += texture_size.x;
+    position.y += texture_size.y;
 
     // update TextboxBase geometry first
     TextboxBase::ensureGeometryUpdate();
@@ -141,23 +160,23 @@ void TextboxFramed::ensureGeometryUpdate()
         size_t = size;
     }
     else {
-        size_t.x = ceil(1.0 * bounds.w / 16) + 2;
-        size_t.y = ceil(1.0 * bounds.h / 16) + 2;
+        size_t.x = ceil(1.0 * bounds.w / texture_size.x) + 2;
+        size_t.y = ceil(1.0 * bounds.h / texture_size.y) + 2;
     }
 
-	background.set_size((size_t.x - 2) * 16.f, (size_t.y - 2) * 16.f);
+	background.set_size((size_t.x - 2) * texture_size.x * 1.f, (size_t.y - 2) * texture_size.y * 1.f);
 	background.set_position(position.x, position.y);
     background.set_color(*graphics::background);
 
-    position.x -= 16.f;
-    position.y -= 16.f;
+    position.x -= texture_size.x;
+    position.y -= texture_size.y;
     createTextboxFrame(size_t);     
 
 	//update bounds to include the frame
     bounds.x = position.x;
     bounds.y = position.y;
-    bounds.w  = size_t.x * 16.f;
-    bounds.h = size_t.y * 16.f;
+    bounds.w  = size_t.x * texture_size.x * 1.f;
+    bounds.h = size_t.y * texture_size.y * 1.f;
 
     createBoundingBox();
 }

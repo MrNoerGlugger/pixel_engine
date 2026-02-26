@@ -7,7 +7,7 @@
 class Texture : public Drawable {
 protected:
     SDL_GPUSampler* sampler;
-    std::string* image_path;
+    std::string* image_path = nullptr;
     bool shader_texture = false;
     float rotation = 0.f;
 

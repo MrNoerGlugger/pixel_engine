@@ -52,6 +52,10 @@ void ShaderTexture::init() {
 
     TextureSheet::init();
     texture_default.init();
+    if (image_path == nullptr) {
+        Logger::log_warning("TextureSheet image_path has not been set!");
+        return;
+    }
 
     ShaderData* shader_data = graphics::get_shader_data(*image_path);
     if (shader_data == NULL) {

@@ -76,6 +76,10 @@ void TextureSheet::create_graphics_pipeline() {
 void TextureSheet::init() {
     Texture::init();
     create_graphics_pipeline();
+    if (image_path == nullptr) {
+        Logger::log_warning("TextureSheet image_path has not been set!");
+        return;
+    }
     if (graphics::texture_parts_map.count(*image_path) == 0) {
         parts = new vector<SDL_FRect>();
         parts->push_back(SDL_FRect{0, 0, viewport.w, viewport.h});
@@ -85,6 +89,10 @@ void TextureSheet::init() {
 }
 
 void TextureSheet::draw() {
+    if (image_path == nullptr) {
+        Logger::log_warning("TextureSheet image_path has not been set!");
+        return;
+    }
     auto textureData = graphics::get_texture(*image_path, shader_texture);
 
     graphics::bind_graphics_pipeline(pipeline, pipeline_id);

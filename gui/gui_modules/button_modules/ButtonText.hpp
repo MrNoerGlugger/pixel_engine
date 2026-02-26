@@ -1,6 +1,6 @@
 #pragma once
-#include "../../gui_base/ButtonBase.hpp"
-#include "../../../gpu/specialized_drawables/CustomText.hpp"
+#include <ButtonBase.hpp>
+#include <CustomText.hpp>
 
 class ButtonText : public ButtonBase 
 {

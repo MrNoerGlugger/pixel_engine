@@ -1,8 +1,6 @@
 #include "Texture.hpp"
-#include "../../../init/Textures.hpp"
 
 Texture::Texture() {
-    image_path = &textures::menu;
 }
 
 Texture::Texture(string* image_path) {
@@ -102,6 +100,10 @@ void Texture::update_geometry() {
         return;
     }
     geometry_update_needed = false;
+    if (image_path == nullptr) {
+        Logger::log_warning("Texture image_path has not been set!");
+        return;
+    }
 
     auto textureData = graphics::get_texture(*image_path, shader_texture);
 
@@ -116,6 +118,10 @@ void Texture::init() {
 }
 
 void Texture::draw() {
+    if (image_path == nullptr) {
+        Logger::log_warning("Texture image_path has not been set!");
+        return;
+    }
     auto textureData = graphics::get_texture(*image_path, shader_texture);
     SDL_GPUTextureSamplerBinding samplerBinding = SDL_GPUTextureSamplerBinding{ .texture = textureData.first, .sampler = sampler };
     SDL_BindGPUFragmentSamplers(graphics::render_pass, 0, &samplerBinding, 1);
