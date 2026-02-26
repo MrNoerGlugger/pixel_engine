@@ -21,8 +21,6 @@
 #include <Text.hpp>
 #include <TextureSheet.hpp>
 
-#include <CustomText.hpp>
-
 #include <GraphicsProcessing.hpp>
 
 #include <ButtonText.hpp>
