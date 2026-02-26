@@ -1,0 +1,9 @@
+add_subdirectory(button_modules)
+add_subdirectory(textbox_modules)
+add_library(gui_modules INTERFACE
+)#
+
+target_include_directories(gui_modules INTERFACE ${CMAKE_CURRENT_SOURCE_DIR} )
+
+target_link_libraries(gui_modules INTERFACE button_modules textbox_modules compiler_flags)
+target_link_libraries(gui_modules INTERFACE button_modules compiler_flags)
