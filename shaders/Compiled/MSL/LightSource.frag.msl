@@ -1,0 +1,65 @@
+#include <metal_stdlib>
+#include <simd/simd.h>
+
+using namespace metal;
+
+struct type_origin_buffer
+{
+    float2 origin;
+    float2 scale;
+};
+
+struct main0_out
+{
+    float4 out_var_SV_Target0 [[color(0)]];
+};
+
+struct main0_in
+{
+    float4 in_var_TEXCOORD1 [[user(locn0)]];
+};
+
+fragment main0_out main0(main0_in in [[stage_in]], constant type_origin_buffer& origin_buffer [[buffer(0)]], texture2d<float> Texture [[texture(0)]], sampler Sampler [[sampler(0)]], float4 gl_FragCoord [[position]])
+{
+    main0_out out = {};
+    float _44 = gl_FragCoord.x + 0.5;
+    float _47 = gl_FragCoord.y + 0.5;
+    float _75 = (_44 / origin_buffer.scale.x) - origin_buffer.origin.x;
+    float _79 = (_47 / origin_buffer.scale.y) - origin_buffer.origin.y;
+    int _83 = int(float(int(abs(_75))) + abs(_79));
+    uint2 _85 = uint2(Texture.get_width(), Texture.get_height());
+    float _87 = float(_85.x);
+    float _89 = float(_85.y);
+    float _92;
+    float _120;
+    float _91 = 0.0;
+    int _94 = 0;
+    for (;;)
+    {
+        if (_94 < _83)
+        {
+            float _99 = float(_94);
+            float _101 = float(_83);
+            float4 _114 = Texture.sample(Sampler, float2(floor(origin_buffer.origin.x + ((_75 * _99) / _101)) / _87, floor(origin_buffer.origin.y + ((_79 * _99) / _101)) / _89));
+            float _115 = _114.w;
+            _92 = (_91 < _115) ? _115 : _91;
+            if (_92 >= 1.0)
+            {
+                _120 = 1.0;
+                break;
+            }
+            _91 = _92;
+            _94++;
+            continue;
+        }
+        else
+        {
+            _120 = _91;
+            break;
+        }
+    }
+    float _122 = (1.0 - (powr(powr(powr(abs(_44 - (origin_buffer.origin.x * origin_buffer.scale.x)) / origin_buffer.scale.x, 2.0) + powr(abs(_47 - (origin_buffer.origin.y * origin_buffer.scale.y)) / origin_buffer.scale.y, 2.0), 0.5), 1.2000000476837158203125) / (in.in_var_TEXCOORD1.w * 255.0))) * (1.0 - _120);
+    out.out_var_SV_Target0 = float4(in.in_var_TEXCOORD1.x * _122, in.in_var_TEXCOORD1.y * _122, in.in_var_TEXCOORD1.z * _122, _122);
+    return out;
+}
+

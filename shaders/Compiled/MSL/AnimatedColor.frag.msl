@@ -1,0 +1,41 @@
+#include <metal_stdlib>
+#include <simd/simd.h>
+
+using namespace metal;
+
+struct animation_data
+{
+    uint time_fraction;
+    float x;
+    float y;
+    float w;
+    float h;
+};
+
+struct type_time_buffer
+{
+    animation_data data;
+};
+
+struct main0_out
+{
+    float4 out_var_SV_Target0 [[color(0)]];
+};
+
+struct main0_in
+{
+    float4 in_var_TEXCOORD123 [[user(locn0)]];
+};
+
+fragment main0_out main0(main0_in in [[stage_in]], constant type_time_buffer& time_buffer [[buffer(1)]], float4 gl_FragCoord [[position]])
+{
+    main0_out out = {};
+    float4 _33 = in.in_var_TEXCOORD123;
+    float _56 = float(10000u - time_buffer.data.time_fraction) + ((((gl_FragCoord.x - time_buffer.data.x) / time_buffer.data.w) + ((gl_FragCoord.y - time_buffer.data.y) / time_buffer.data.h)) * 5000.0);
+    _33.x = abs((float(int(_56) - 10001 * (int(_56) / 10001)) - 5000.0) * 0.00019999999494757503271102905273438);
+    _33.y = abs((float(int(_56 + 3333.0) - 10001 * (int(_56 + 3333.0) / 10001)) - 5000.0) * 0.00019999999494757503271102905273438);
+    _33.z = abs((float(int(_56 + 6667.0) - 10001 * (int(_56 + 6667.0) / 10001)) - 5000.0) * 0.00019999999494757503271102905273438);
+    out.out_var_SV_Target0 = _33;
+    return out;
+}
+

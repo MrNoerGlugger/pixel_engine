@@ -1,0 +1,58 @@
+#include <metal_stdlib>
+#include <simd/simd.h>
+
+using namespace metal;
+
+struct main0_out
+{
+    float4 out_var_TEXCOORD123 [[user(locn0)]];
+    float4 gl_Position [[position]];
+};
+
+vertex main0_out main0(uint gl_VertexIndex [[vertex_id]])
+{
+    main0_out out = {};
+    bool _38;
+    if (!(gl_VertexIndex == 0u))
+    {
+        _38 = gl_VertexIndex == 3u;
+    }
+    else
+    {
+        _38 = true;
+    }
+    float4 _57;
+    float4 _58;
+    if (_38)
+    {
+        _57 = float4(0.0, 1.0, 0.0, 1.0);
+        _58 = float4(-0.5, 0.0, 0.0, 1.0);
+    }
+    else
+    {
+        bool _47;
+        if (!(gl_VertexIndex == 1u))
+        {
+            _47 = gl_VertexIndex == 4u;
+        }
+        else
+        {
+            _47 = true;
+        }
+        float4 _54;
+        if (_47)
+        {
+            _54 = float4(0.5, 0.0, 0.0, 1.0);
+        }
+        else
+        {
+            _54 = select(float4(0.0, -1.0, 0.0, 1.0), float4(0.0, 1.0, 0.0, 1.0), bool4(gl_VertexIndex == 2u));
+        }
+        _57 = select(float4(1.0, 1.0, 1.0, 0.5), float4(1.0, 0.0, 1.0, 1.0), bool4(_47));
+        _58 = _54;
+    }
+    out.out_var_TEXCOORD123 = _57;
+    out.gl_Position = _58;
+    return out;
+}
+

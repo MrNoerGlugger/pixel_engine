@@ -98,3 +98,9 @@ add_library(pixel_engine STATIC
 target_include_directories(pixel_engine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(pixel_engine PUBLIC functional_base gpu gui input sdl_all compiler_flags)
+
+add_custom_command(
+    TARGET pixel_engine
+    COMMENT "Copy shaders folder"
+    PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/shaders $<TARGET_FILE_DIR:pixel_engine>/resources/shaders
+)
