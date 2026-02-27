@@ -17,6 +17,7 @@ SDL_Color* graphics::background;
 SDL_Color* graphics::text_color;
 int graphics::frameType = 0;
 
+map<string*, string> graphics::resource_path_map;
 map<string, pair<SDL_GPUTexture*, SDL_Point>> graphics::texture_map;
 map<string, shader_data> graphics::shader_texture_map;
 map<string, pair<SDL_GPUTexture*, SDL_Point>> graphics::text_map;

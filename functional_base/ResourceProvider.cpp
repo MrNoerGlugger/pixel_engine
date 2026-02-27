@@ -13,50 +13,37 @@ std::string graphics::get_item_symbol(int id) {
 	return item;
 }
 
-std::string graphics::get_resource_path(graphics::ResourcePath resource_path, std::string file_name) {
-	std::string path = "resources/textures/";
+void graphics::add_resource_path(std::string* resource_id, std::string resource_path) {
+	graphics::resource_path_map.insert({resource_id, resource_path});
+}
 
-	switch (resource_path)
+std::string graphics::get_resource_path(ResourceType resource_type, std::string* resource_id, std::string file_name) {
+	std::string path = "resources/";
+
+	switch (resource_type)
 	{
-	case ATTACKS:
-		path += "attacks/";
+	case TEXTURES:
+		path += "textures/";
 		break;
 
-	case BACKGROUND:
-		path += "background/";
+	case MUSIC:
+		path += "audio/music/";
 		break;
 
-	case CHARACTERS:
-		path += "characters/";
+	case SOUNDS:
+		path += "audio/sounds/";
 		break;
 	
-	case DUNGEON:
-		path += "dungeon/";
-		break;
-	
-	case FONT:
-		path += "font/";
-		break;
-
-	case ITEMS:
-		path += "items/";
-		break;
-
-	case OVERLAY:
-		path += "overlay/";
-		break;
-
-	case ROOM:
-		path += "room/";
-		break;
-
 	case SHADERS:
 		path += "shaders/";
 		break;
+	}
 
-	case TEXTBOX:
-		path += "textbox/";
-		break;
+	if (graphics::resource_path_map.count(resource_id) == 0) {
+		Logger::log_warning(std::format("resource_id: {} not found!", *resource_id));
+	}
+	else {
+		path += graphics::resource_path_map.at(resource_id);
 	}
 
 	path += file_name;

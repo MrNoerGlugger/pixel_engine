@@ -53,6 +53,7 @@ namespace graphics {
     extern SDL_Color* text_color;
     extern int frameType;
 
+    extern map<string*, string> resource_path_map;
     extern map<string, pair<SDL_GPUTexture*, SDL_Point>> texture_map;
     extern map<string, shader_data> shader_texture_map;
     extern map<string, pair<SDL_GPUTexture*, SDL_Point>> text_map;
