@@ -10,6 +10,7 @@ namespace game {
 //#ifdef linux
     extern bool compile_shader(
         SDL_GPUDevice* device,
+        const char* base_path,
         const char* shaderFilename,
         Uint32 gpu_shader_format
     );
