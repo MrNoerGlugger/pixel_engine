@@ -87,6 +87,9 @@ target_link_libraries(sdl_all INTERFACE SDL3::SDL3 SDL3_ttf::SDL3_ttf SDL3_image
 
 target_link_libraries(sdl_all INTERFACE SDL3_shadercross::SDL3_shadercross)
 
+add_library(compiler_flags INTERFACE)
+target_compile_features(compiler_flags INTERFACE cxx_std_20)
+target_compile_definitions(compiler_flags INTERFACE SRC_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
 
 add_library(pixel_engine STATIC
     Engine.cpp
@@ -95,4 +98,4 @@ add_library(pixel_engine STATIC
 
 target_include_directories(pixel_engine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_link_libraries(pixel_engine PUBLIC functional_base gpu gui input sdl_all)
+target_link_libraries(pixel_engine PUBLIC functional_base gpu gui input sdl_all compiler_flags)
