@@ -24,7 +24,7 @@ bool game::compile_shader(
 	char srcPath[256];
 	char fullPath[256];
     const char *BasePath = SDL_GetBasePath();
-    SDL_snprintf(srcPath, sizeof(srcPath), "%s/resources/shaders/Source/%s.hlsl", SRC_DIR, shaderFilename);
+    SDL_snprintf(srcPath, sizeof(srcPath), "%s/resources/shaders/Source/%s.hlsl", BasePath, shaderFilename);
 	const char *entrypoint;
 
 
@@ -39,13 +39,13 @@ bool game::compile_shader(
     
 
 	if (gpu_shader_format & SDL_GPU_SHADERFORMAT_SPIRV) {
-		SDL_snprintf(fullPath, sizeof(fullPath), "%s/resources/shaders/Compiled/SPIRV/%s.spv", SRC_DIR, shaderFilename);
+		SDL_snprintf(fullPath, sizeof(fullPath), "%s/resources/shaders/Compiled/SPIRV/%s.spv", BasePath, shaderFilename);
 		entrypoint = "main";
 	} else if (gpu_shader_format & SDL_GPU_SHADERFORMAT_MSL) {
-		SDL_snprintf(fullPath, sizeof(fullPath), "%s/resources/shaders/Compiled/MSL/%s.msl", SRC_DIR, shaderFilename);
+		SDL_snprintf(fullPath, sizeof(fullPath), "%s/resources/shaders/Compiled/MSL/%s.msl", BasePath, shaderFilename);
 		entrypoint = "main";
 	} else if (gpu_shader_format & SDL_GPU_SHADERFORMAT_DXIL) {
-		SDL_snprintf(fullPath, sizeof(fullPath), "%s/resources/shaders/Compiled/DXIL/%s.dxil", SRC_DIR, shaderFilename);
+		SDL_snprintf(fullPath, sizeof(fullPath), "%s/resources/shaders/Compiled/DXIL/%s.dxil", BasePath, shaderFilename);
 		entrypoint = "main";
 	} else {
 		Logger::log_error(std::format("Unrecognized backend shader format! {}", shaderFilename));
