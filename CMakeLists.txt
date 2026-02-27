@@ -20,70 +20,46 @@ add_subdirectory(input)
 
 include(FetchContent)
 
-# find_package(SDL3 QUIET)
-# if (NOT SDL3_FOUND)
-#     message(STATUS "Did not find SDL3 :^")
+set(BUILD_SHARED_LIBS OFF)
 
-    FetchContent_Declare(SDL3
-        GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
-        GIT_TAG release-3.4.0
-        GIT_SHALLOW ON
-        EXCLUDE_FROM_ALL
-    )
-    FetchContent_MakeAvailable(SDL3)
-# endif()
+FetchContent_Declare(SDL3
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
+    GIT_TAG release-3.4.0
+    GIT_SHALLOW ON
+)
+FetchContent_MakeAvailable(SDL3)
 
-# find_package(SDL3_ttf QUIET)
-# if (NOT SDL3_ttf_FOUND)
-#     message(STATUS "Did not find SDL3_ttf :^")
+set(SDLTTF_PLUTOSVG OFF CACHE BOOL "Enable SVG support in FreeType" FORCE)
 
-    set(SDLTTF_PLUTOSVG OFF CACHE BOOL "Enable SVG support in FreeType" FORCE)
+FetchContent_Declare(SDL3_ttf
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL_ttf.git
+    GIT_TAG release-3.2.2
+    GIT_SHALLOW ON
+)
+FetchContent_MakeAvailable(SDL3_ttf)
 
-    FetchContent_Declare(SDL3_ttf
-        GIT_REPOSITORY https://github.com/libsdl-org/SDL_ttf.git
-        GIT_TAG release-3.2.2
-        GIT_SHALLOW ON
-        EXCLUDE_FROM_ALL
-    )
-    FetchContent_MakeAvailable(SDL3_ttf)
-# endif()
-
-# find_package(SDL3_image QUIET)
-# if (NOT SDL3_image_FOUND)
-#     message(STATUS "Did not find SDL3_image :^")
-
-    if (WIN32)
-        set(DAV1D_ASM OFF CACHE BOOL "Disable DAV1D_ASM" FORCE)
-    endif()
-
-    FetchContent_Declare(SDL3_image
-        GIT_REPOSITORY https://github.com/libsdl-org/SDL_image.git
-        GIT_TAG release-3.4.0
-        GIT_SHALLOW ON
-        EXCLUDE_FROM_ALL
-    )
-    FetchContent_MakeAvailable(SDL3_image)
-# endif()
+if (WIN32)
+    set(DAV1D_ASM OFF CACHE BOOL "Disable DAV1D_ASM" FORCE)
+endif()
+FetchContent_Declare(SDL3_image
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL_image.git
+    GIT_TAG release-3.4.0
+    GIT_SHALLOW ON
+)
+FetchContent_MakeAvailable(SDL3_image)
 
 
 add_library(sdl_all INTERFACE)
 target_link_libraries(sdl_all INTERFACE SDL3::SDL3 SDL3_ttf::SDL3_ttf SDL3_image::SDL3_image)
 
 
-
-# find_package(SDL3_shadercross QUIET)
-# if (NOT SDL3_shadercross_FOUND)
-    # message(STATUS "Did not find SDL3_shadercross :^")
-
-    set(SDLSHADERCROSS_VENDORED ON CACHE BOOL "Something something" FORCE)
-    FetchContent_Declare(SDL3_shadercross
-        GIT_REPOSITORY https://github.com/libsdl-org/SDL_shadercross.git
-        GIT_TAG main
-        GIT_SHALLOW ON
-        # EXCLUDE_FROM_ALL
-    )
-    FetchContent_MakeAvailable(SDL3_shadercross)
-# endif()
+set(SDLSHADERCROSS_VENDORED ON CACHE BOOL "Something something" FORCE)
+FetchContent_Declare(SDL3_shadercross
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL_shadercross.git
+    GIT_TAG main
+    GIT_SHALLOW ON
+)
+FetchContent_MakeAvailable(SDL3_shadercross)
 
 target_link_libraries(sdl_all INTERFACE SDL3_shadercross::SDL3_shadercross)
 
