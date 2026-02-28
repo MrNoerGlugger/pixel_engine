@@ -45,7 +45,7 @@ namespace graphics {
 
     extern string shadow_map_path;
     extern int gpu_target_texture_amount;
-    extern string current_screen;
+    extern string* current_screen;
 
     extern TTF_Font* font;
     extern TTF_TextEngine* text_engine;

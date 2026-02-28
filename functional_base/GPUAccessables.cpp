@@ -9,7 +9,7 @@ string graphics::pipeline_id = "";
 
 string graphics::shadow_map_path = "";
 int graphics::gpu_target_texture_amount = 0;
-string graphics::current_screen = "";
+string* graphics::current_screen = nullptr;
 
 TTF_Font* graphics::font;
 TTF_TextEngine* graphics::text_engine;

@@ -6,7 +6,7 @@
 #include "TextureInit.hpp"
 #include <format>
 
-map<string, Drawable*> GraphicsProcessing::screen_map;
+map<string*, Drawable*> GraphicsProcessing::screen_map;
 string GraphicsProcessing::texture_shader_map = "";
 string GraphicsProcessing::texture_main_target = "";
 string GraphicsProcessing::texture_overlay_target = "";
@@ -14,8 +14,11 @@ Texture GraphicsProcessing::texture_main = Texture();
 Texture GraphicsProcessing::texture_overlay = Texture();
 ShaderMap GraphicsProcessing::shader_map = ShaderMap();
 
-void GraphicsProcessing::add_screen(Drawable* screen, string screen_id) {
+void GraphicsProcessing::add_screen(Drawable* screen, string* screen_id) {
     screen_map.insert({screen_id, screen});
+}
+Drawable* GraphicsProcessing::get_screen(string* screen_id) {
+    return screen_map.at(screen_id);
 }
 
 void GraphicsProcessing::interpret_window_scale() {
