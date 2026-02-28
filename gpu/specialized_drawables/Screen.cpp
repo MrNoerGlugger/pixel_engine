@@ -1,10 +1,32 @@
 #include "Screen.hpp"
 
-void Screen::add_default_drawable(Drawable* drawable) {
-    drawable_default_map.push_back(drawable);
+int Screen::add_default_drawable(Drawable* drawable) {
+    int i = 0;
+    for (auto drawable_pair : drawable_default_map) {
+        if (i != drawable_pair.first) {
+            break;
+        }
+        i++;
+    }
+    drawable_default_map.insert({i, drawable});
+    return i;
 }
-void Screen::add_overlay_drawable(Drawable* drawable) {
-    drawable_overlay_map.push_back(drawable);
+int Screen::add_overlay_drawable(Drawable* drawable) {
+    int i = 0;
+    for (auto drawable_pair : drawable_overlay_map) {
+        if (i != drawable_pair.first) {
+            break;
+        }
+        i++;
+    }
+    drawable_overlay_map.insert({i, drawable});
+    return i;
+}
+void Screen::remove_default_drawable(int id) {
+    drawable_default_map.erase(id);
+}
+void Screen::remove_overlay_drawable(int id) {
+    drawable_overlay_map.erase(id);
 }
 
 SDL_FRect Screen::get_bounds() {
@@ -13,7 +35,8 @@ SDL_FRect Screen::get_bounds() {
     float y_min;
     float y_max;
     bool start_value_set = false;
-    for (auto drawable : drawable_default_map) {
+    for (auto drawable_pair : drawable_default_map) {
+        auto drawable = drawable_pair.second;
         if (!start_value_set || x_min > drawable->get_bounds().x) {
             x_min = drawable->get_bounds().x;
         }
@@ -32,20 +55,20 @@ SDL_FRect Screen::get_bounds() {
 }
 
 void Screen::update_geometry() {
-    for (auto drawable : drawable_default_map) {
-        drawable->update_geometry();
+    for (auto drawable_pair : drawable_default_map) {
+        drawable_pair.second->update_geometry();
     }
-    for (auto drawable : drawable_overlay_map) {
-        drawable->update_geometry();
+    for (auto drawable_pair : drawable_overlay_map) {
+        drawable_pair.second->update_geometry();
     }
 }
 
 void Screen::init() {
-    for (auto drawable : drawable_default_map) {
-        drawable->init();
+    for (auto drawable_pair : drawable_default_map) {
+        drawable_pair.second->init();
     }
-    for (auto drawable : drawable_overlay_map) {
-        drawable->init();
+    for (auto drawable_pair : drawable_overlay_map) {
+        drawable_pair.second->init();
     }
 }
 
@@ -54,13 +77,13 @@ void Screen::draw() {
     case DEFAULT:
     case SHADOW:
     case LIGHT:
-        for (auto drawable : drawable_default_map) {
-            drawable->draw();
+        for (auto drawable_pair : drawable_default_map) {
+            drawable_pair.second->draw();
         }
         break;
     case OVERLAY:
-        for (auto drawable : drawable_overlay_map) {
-            drawable->draw();
+        for (auto drawable_pair : drawable_overlay_map) {
+            drawable_pair.second->draw();
         }
         break;
     }
@@ -68,11 +91,11 @@ void Screen::draw() {
 
 void Screen::free() {
     for (auto it = drawable_default_map.begin(); it != drawable_default_map.end(); it++) {
-        (*it)->free();
-        delete(*it);
+        (*it).second->free();
+        delete((*it).second);
     }
     for (auto it = drawable_overlay_map.begin(); it != drawable_overlay_map.end(); it++) {
-        (*it)->free();
-        delete(*it);
+        (*it).second->free();
+        delete((*it).second);
     }
 }

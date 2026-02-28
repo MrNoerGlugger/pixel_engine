@@ -3,12 +3,16 @@
 #include <Drawable.hpp>
 
 class Screen : public Drawable {
-    vector<Drawable*> drawable_default_map;
-    vector<Drawable*> drawable_overlay_map;
+    map<int, Drawable*> drawable_default_map;
+    map<int, Drawable*> drawable_overlay_map;
 public:
-    void add_default_drawable(Drawable* drawable);
+    int add_default_drawable(Drawable* drawable);
 
-    void add_overlay_drawable(Drawable* drawable);
+    int add_overlay_drawable(Drawable* drawable);
+
+    void remove_default_drawable(int id);
+
+    void remove_overlay_drawable(int id);
 
     virtual SDL_FRect get_bounds();
 
