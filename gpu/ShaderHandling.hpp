@@ -4,7 +4,6 @@
 
 #include <SDL3/SDL.h>
 #include <SDL3_shadercross/SDL_shadercross.h>
-// #include "../../../build/_deps/sdl3_shadercross-src/include/SDL3_shadercross/SDL_shadercross.h"
 
 namespace game {
 //#ifdef linux

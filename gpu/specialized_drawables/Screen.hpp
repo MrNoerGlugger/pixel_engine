@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../generic_drawables/Drawable.hpp"
+#include <Drawable.hpp>
 
 class Screen : public Drawable {
     vector<Drawable*> drawable_default_map;

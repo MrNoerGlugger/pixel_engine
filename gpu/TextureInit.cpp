@@ -1,7 +1,4 @@
 #include "TextureInit.hpp"
-#include "Logger.hpp"
-#include "SDL3/SDL_error.h"
-#include <format>
 
 void graphics::register_texture(string path) {
 

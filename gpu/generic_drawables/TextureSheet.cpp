@@ -1,5 +1,4 @@
 #include "TextureSheet.hpp"
-#include "SDL3/SDL_gpu.h"
 
 TextureSheet::TextureSheet() {}
 

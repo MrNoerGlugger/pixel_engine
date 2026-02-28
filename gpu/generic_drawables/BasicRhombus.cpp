@@ -1,5 +1,4 @@
 #include "BasicRhombus.hpp"
-#include "GPUAccessables.hpp"
 
 BasicRhombus::BasicRhombus() {}
 
