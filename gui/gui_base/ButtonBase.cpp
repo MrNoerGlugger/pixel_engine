@@ -8,8 +8,7 @@ textbox_id            (),
 selection_holder      (),
 activation_holder     (),
 selected              (false),
-bounds                (),
-geometry_update_needed(false)
+bounds                ()
 {
     bounding_box.set_color(SDL_Color{255, 0, 0, 255});
 }
@@ -21,8 +20,7 @@ textbox_id            (textbox),
 selection_holder      (),
 activation_holder     (),
 selected              (false),
-bounds                (),
-geometry_update_needed(true)
+bounds                ()
 {  
     bounding_box.set_color(SDL_Color{255, 0, 0, 255});
     set_position(visual.x, visual.y);
@@ -62,7 +60,7 @@ void ButtonBase::checkCursor() {
 ////////////////////////////////////////////////////////////
 SDL_FRect ButtonBase::get_bounds()
 {
-    ensureGeometryUpdate();
+    update_geometry();
 
     return bounds;
 }
@@ -90,7 +88,7 @@ void ButtonBase::draw()
 }
 
 
-void ButtonBase::ensureGeometryUpdate()
+void ButtonBase::update_geometry()
 {
     // Do nothing, if geometry has not changed
     if (!geometry_update_needed)

@@ -50,6 +50,8 @@ void TextboxFramed::set_image_paths(std::string* corners, std::string* edges) {
 	temp_sheet.init();
 	auto parts = graphics::texture_parts_map.at(*corners);
 	texture_size = {(int)parts.begin()->w, (int)parts.begin()->h};
+	
+	geometry_update_needed = true;
 }
 
 
@@ -132,7 +134,7 @@ void TextboxFramed::draw()
 {
 	if (!displayed) return;
 
-    ensureGeometryUpdate();
+    update_geometry();
     
 	for (auto it = frame_parts.begin(); it != frame_parts.end(); it++) {
 		it->draw();
@@ -143,17 +145,17 @@ void TextboxFramed::draw()
 }
 
 
-void TextboxFramed::ensureGeometryUpdate()
+void TextboxFramed::update_geometry()
 {
     // Do nothing, if geometry has not changed
-    if (!geometryNeedUpdate)
+    if (!geometry_update_needed)
         return;
 
     position.x += texture_size.x;
     position.y += texture_size.y;
 
     // update TextboxBase geometry first
-    TextboxBase::ensureGeometryUpdate();
+    TextboxBase::update_geometry();
     
     SDL_Point size_t;
     if (size.x != 0 || size.y != 0) {

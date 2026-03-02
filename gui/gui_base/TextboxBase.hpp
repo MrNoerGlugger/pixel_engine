@@ -63,7 +63,7 @@ protected:
     ///
     /// All the attributes related to rendering are cached, such
     /// that the geometry is only updated when necessary.
-    void ensureGeometryUpdate();
+    virtual void update_geometry();
 
     ////////////////////////////////////////////////////////////
     // Member data
@@ -74,7 +74,6 @@ protected:
     vector<ButtonBase*>     buttons;            ///< Buttons included in the Textbox
     mutable bool            selected;           ///< Is this textbox currently selected?
     mutable bool            focus;              ///< Is the Textbox in focus?
-    mutable bool            geometryNeedUpdate; ///< Does the geometry need to be recomputed?
     mutable SDL_FRect       bounds;             ///< Bounding rectangle of the textbox (in local coordinates)
     mutable Rectangle       bounding_box;       ///< Bounding Box as a Drawable for bugfixing
 };

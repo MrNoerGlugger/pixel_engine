@@ -71,7 +71,7 @@ protected:
     ///
     /// All the attributes related to rendering are cached, such
     /// that the geometry is only updated when necessary.
-    virtual void ensureGeometryUpdate();
+    virtual void update_geometry();
 
 
     /// @brief Call all functions for the selection event
@@ -94,6 +94,5 @@ protected:
     FunctionHolder          activation_holder;      ///< Functions needed to be called when activated
     mutable bool            selected;               ///< Is this button currently selected?
     mutable SDL_FRect       bounds;                 ///< Bounding rectangle of the button (in local coordinates)
-    mutable bool            geometry_update_needed; ///< Does the geometry need to be recomputed?
     mutable Rectangle       bounding_box;           ///< Bounding Box as a Drawable for bugfixing
 };

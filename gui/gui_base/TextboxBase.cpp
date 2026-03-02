@@ -8,7 +8,6 @@ displayed             (false),
 buttons               (),
 selected              (false),
 focus                 (false),
-geometryNeedUpdate    (false),
 bounds                (),
 bounding_box          ()
 {
@@ -24,7 +23,6 @@ displayed             (false),
 buttons               (buttons),
 selected              (false),
 focus                 (false),
-geometryNeedUpdate    (true),
 bounds                (),
 bounding_box          ()
 {
@@ -58,14 +56,14 @@ void TextboxBase::checkCursor() {
 
 void TextboxBase::add_button(ButtonBase* button)  {
     buttons.push_back(button);
-    geometryNeedUpdate = true;
+    geometry_update_needed = true;
 }
 
 
 ////////////////////////////////////////////////////////////
 SDL_FRect TextboxBase::get_bounds()
 {
-    ensureGeometryUpdate();
+    update_geometry();
 
     return bounds;
 }
@@ -88,7 +86,7 @@ void TextboxBase::draw()
 {
     if (!displayed) return;
 
-    ensureGeometryUpdate();
+    update_geometry();
 
     //draw the debug bounding box
     if (selected && in_debug_mode) {
@@ -102,10 +100,10 @@ void TextboxBase::draw()
 }
 
 
-void TextboxBase::ensureGeometryUpdate()
+void TextboxBase::update_geometry()
 {
     // Do nothing, if geometry has not changed
-    if (!geometryNeedUpdate)
+    if (!geometry_update_needed)
         return;
 
     bounds.x = position.x;
@@ -135,5 +133,5 @@ void TextboxBase::ensureGeometryUpdate()
     createBoundingBox();
 
     // Mark geometry as updated
-    geometryNeedUpdate = false;
+    geometry_update_needed = false;
 }

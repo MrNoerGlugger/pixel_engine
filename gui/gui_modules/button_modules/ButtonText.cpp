@@ -23,7 +23,7 @@ ButtonText::ButtonBase(mapped, visual, textbox)
 ////////////////////////////////////////////////////////////
 void ButtonText::draw()
 {
-    ensureGeometryUpdate();
+    update_geometry();
 
     ButtonBase::draw();
 
@@ -36,7 +36,7 @@ void ButtonText::draw()
 }
 
 
-void ButtonText::ensureGeometryUpdate()
+void ButtonText::update_geometry()
 {
     // Do nothing, if geometry has not changed
     if (!geometry_update_needed)
@@ -56,5 +56,5 @@ void ButtonText::ensureGeometryUpdate()
     bounds.h += text_bounds.h;
 
     // update ButtonBase geometry
-    ButtonBase::ensureGeometryUpdate();
+    ButtonBase::update_geometry();
 }

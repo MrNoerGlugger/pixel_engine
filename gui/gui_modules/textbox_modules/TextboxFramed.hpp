@@ -57,5 +57,5 @@ private:
     ///
     /// All the attributes related to rendering are cached, such
     /// that the geometry is only updated when necessary.
-    virtual void ensureGeometryUpdate();
+    virtual void update_geometry();
 };
