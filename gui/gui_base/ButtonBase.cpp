@@ -25,7 +25,6 @@ selected              (false),
 bounds                ()
 {  
     bounding_box.set_color(SDL_Color{255, 0, 0, 255});
-    set_position(visual.x, visual.y);
 }
 
 
@@ -62,7 +61,7 @@ void ButtonBase::checkCursor() {
 void ButtonBase::set_position(float x, float y) {
     Drawable::set_position(x, y);
     viewport.x = position.x + pos_visual.x;
-    viewport.x = position.y + pos_visual.y;
+    viewport.y = position.y + pos_visual.y;
     geometry_update_needed  = true;
 }
 
@@ -103,8 +102,8 @@ void ButtonBase::update_geometry()
     if (!geometry_update_needed)
         return;
 
-    bounds.x = position.x;
-    bounds.y = position.y;
+    bounds.x = viewport.x;
+    bounds.y = viewport.y;
     
     createBoundingBox();
 

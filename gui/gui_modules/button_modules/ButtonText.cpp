@@ -42,8 +42,8 @@ void ButtonText::update_geometry()
     if (!geometry_update_needed)
         return;
 
-    text.set_position(position.x, position.y);
-    text_selected.set_position(position.x, position.y);
+    text.set_position(viewport.x, viewport.y);
+    text_selected.set_position(viewport.x, viewport.y);
 
     text.init();
     text_selected.init();
