@@ -13,6 +13,11 @@
 #endif
 
 path FilePath::filePath;
+string application_name = "Game";
+
+void set_application_name(string name) {
+	application_name = name;
+}
 
 void FilePath::createFilePath() {
 	//initialize filePath
@@ -32,8 +37,13 @@ void FilePath::createFilePath() {
 	if (!std::filesystem::exists(filePath))
 		std::filesystem::create_directory(filePath);
 
-	//check "Game"
-	filePath += "/Game";
+	//check "NoerGames"
+	filePath += "/PixelEngine";
+ 	if (!std::filesystem::exists(filePath))
+		std::filesystem::create_directory(filePath);
+
+	//check application_name
+	filePath += "/" + application_name;
  	if (!std::filesystem::exists(filePath))
 		std::filesystem::create_directory(filePath);
 #endif
@@ -43,8 +53,14 @@ void FilePath::createFilePath() {
 	const char *homedir = getpwuid(getuid())->pw_dir;
 	filePath += homedir;
 
-	//check .game folder
-	filePath += "/.game/";
+	//check .noer-games folder
+	filePath += "/.pixel-engine/";
+
+ 	if (!std::filesystem::exists(filePath))
+		std::filesystem::create_directory(filePath);
+
+	//check application_name folder
+	filePath += application_name + "/";
 
  	if (!std::filesystem::exists(filePath))
 		std::filesystem::create_directory(filePath);
