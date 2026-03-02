@@ -33,7 +33,7 @@ void GraphicsProcessing::interpret_window_scale() {
 
 void GraphicsProcessing::resize_textures() {
     int current_screen_width = screen_map.at(graphics::current_screen)->get_bounds().w;
-    int current_screen_height = screen_map.at(graphics::current_screen)->get_bounds().w;
+    int current_screen_height = screen_map.at(graphics::current_screen)->get_bounds().h;
     if (current_screen_width != graphics::get_texture(graphics::shadow_map_path, false).second.x || current_screen_height != graphics::get_texture(graphics::shadow_map_path, false).second.y) {
         graphics::register_target_texture(current_screen_width, current_screen_height, graphics::shadow_map_path );
         graphics::register_target_texture(current_screen_width, current_screen_height, texture_shader_map        );
