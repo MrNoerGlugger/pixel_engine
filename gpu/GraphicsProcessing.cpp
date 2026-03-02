@@ -275,6 +275,7 @@ void GraphicsProcessing::draw_overlay_phase() {
     }
     SDL_GPUColorTargetInfo colorTargetInfo = {
         .texture = graphics::get_texture(texture_overlay_target, false).first,
+        .clear_color = SDL_FColor(0.0f, 0.0f, 0.0f, 1.0f),
         .load_op = SDL_GPU_LOADOP_LOAD,
         .store_op = SDL_GPU_STOREOP_STORE
     };

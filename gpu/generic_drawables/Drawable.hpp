@@ -10,7 +10,7 @@ class Drawable {
 protected:
     SDL_GPUGraphicsPipeline* pipeline;
     string pipeline_id;
-    SDL_GPUViewport viewport;
+    SDL_GPUViewport viewport{0.f, 0.f, 0.f, 0.f, 0.f, 1.f};
     SDL_FPoint position = {0.0f, 0.0f};
     SDL_FPoint scale = {1.0f, 1.0f};
 
