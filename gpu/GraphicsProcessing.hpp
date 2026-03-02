@@ -16,7 +16,7 @@
 // #include "../gui/gui_modules/textbox_modules/TextboxFramed.hpp"
 
 class GraphicsProcessing {
-    static map<string*, Drawable*> screen_map;
+    static map<const string*, Drawable*> screen_map;
     static string texture_shader_map;
     static string texture_main_target;
     static string texture_overlay_target;
@@ -28,10 +28,10 @@ class GraphicsProcessing {
 public:
 //pre-processing steps
     //adds a screen to the screen_map
-    static void add_screen(Drawable* screen, string* screen_id);
+    static void add_screen(Drawable* screen, const string* screen_id);
 
     //retrieves the screen for further changes
-    static Drawable* get_screen(string* screen_id);
+    static Drawable* get_screen(const string* screen_id);
 
     //translate current window resolution into a scale
     static void interpret_window_scale();
