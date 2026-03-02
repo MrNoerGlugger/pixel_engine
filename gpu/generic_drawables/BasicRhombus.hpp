@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Drawable.hpp"
+#include <Drawable.hpp>
 
 class BasicRhombus : public Drawable {
 

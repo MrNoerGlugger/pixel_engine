@@ -1,32 +1,37 @@
 #include "Screen.hpp"
 
-int Screen::add_default_drawable(Drawable* drawable) {
+int Screen::add_drawable(Drawable* drawable, bool overlay, bool textbox) {
     int i = 0;
-    for (auto drawable_pair : drawable_default_map) {
+    map<int, Drawable*>* current_map = overlay ? &drawable_overlay_map : &drawable_default_map;
+    for (auto drawable_pair : *current_map) {
         if (i != drawable_pair.first) {
             break;
         }
         i++;
     }
-    drawable_default_map.insert({i, drawable});
-    return i;
-}
-int Screen::add_overlay_drawable(Drawable* drawable) {
-    int i = 0;
-    for (auto drawable_pair : drawable_overlay_map) {
-        if (i != drawable_pair.first) {
-            break;
+    current_map->insert({i, drawable});
+    if (textbox) {
+        if (dynamic_cast<TextboxBase*>(drawable) == nullptr) {
+            Logger::log_warning("wrong usage of add_drawable: tried to add a non-Textbox to the Textbox map!");
+            return i;
         }
-        i++;
+        textboxes.insert({i * (overlay ? 1 : -1), (TextboxBase*)drawable});
     }
-    drawable_overlay_map.insert({i, drawable});
     return i;
 }
-void Screen::remove_default_drawable(int id) {
-    drawable_default_map.erase(id);
+
+void Screen::remove_drawable(int id, bool overlay, bool textbox) {
+    map<int, Drawable*>* current_map = overlay ? &drawable_overlay_map : &drawable_default_map;
+    current_map->erase(id);
+    if (textbox) {
+        textboxes.erase(id * (overlay ? 1 : -1));
+    }
 }
-void Screen::remove_overlay_drawable(int id) {
-    drawable_overlay_map.erase(id);
+
+void Screen::check_textboxes() {
+    for (auto textbox : textboxes) {
+        textbox.second->checkCursor();
+    }
 }
 
 SDL_FRect Screen::get_bounds() {

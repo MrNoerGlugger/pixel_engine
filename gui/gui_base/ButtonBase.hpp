@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../../gpu/generic_drawables/Rectangle.hpp"
-#include "../../functional_base/FunctionHolder.hpp"
-#include "../../input/InputBase.hpp"
+#include <Rectangle.hpp>
+#include <FunctionHolder.hpp>
+#include <InputBase.hpp>
 
 extern const bool in_debug_mode;
 

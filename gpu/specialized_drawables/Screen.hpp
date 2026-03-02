@@ -1,21 +1,20 @@
 #pragma once
 
 #include <Drawable.hpp>
+#include <TextboxBase.hpp>
 
 class Screen : public Drawable {
     map<int, Drawable*> drawable_default_map;
     map<int, Drawable*> drawable_overlay_map;
+    map<int, TextboxBase*> textboxes;
 public:
-    int add_default_drawable(Drawable* drawable);
+    int add_drawable(Drawable* drawable, bool overlay = false, bool textbox = false);
 
-    int add_overlay_drawable(Drawable* drawable);
+    void remove_drawable(int id, bool overlay = false, bool textbox = false);
 
-    void remove_default_drawable(int id);
-
-    void remove_overlay_drawable(int id);
+    void check_textboxes();
 
     virtual SDL_FRect get_bounds();
-
 
     virtual void update_geometry();
 
