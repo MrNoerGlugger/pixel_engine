@@ -12,10 +12,10 @@
 #include <pwd.h>
 #endif
 
+string FilePath::application_name = "Game";
 path FilePath::filePath;
-string application_name = "Game";
 
-void set_application_name(string name) {
+void FilePath::set_application_name(string name) {
 	application_name = name;
 }
 
