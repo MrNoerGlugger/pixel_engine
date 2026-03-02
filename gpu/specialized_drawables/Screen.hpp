@@ -10,7 +10,7 @@ class Screen : public Drawable {
 public:
     int add_drawable(Drawable* drawable, bool overlay = false, bool textbox = false);
 
-    void remove_drawable(int id, bool overlay = false, bool textbox = false);
+    void remove_drawable(int id, bool overlay = false);
 
     void check_textboxes();
 

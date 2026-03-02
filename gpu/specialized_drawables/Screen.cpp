@@ -20,10 +20,10 @@ int Screen::add_drawable(Drawable* drawable, bool overlay, bool textbox) {
     return i;
 }
 
-void Screen::remove_drawable(int id, bool overlay, bool textbox) {
+void Screen::remove_drawable(int id, bool overlay) {
     map<int, Drawable*>* current_map = overlay ? &drawable_overlay_map : &drawable_default_map;
     current_map->erase(id);
-    if (textbox) {
+    if (textboxes.count(id * (overlay ? 1 : -1)) != 0) {
         textboxes.erase(id * (overlay ? 1 : -1));
     }
 }
