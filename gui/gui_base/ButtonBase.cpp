@@ -4,6 +4,7 @@
 ////////////////////////////////////////////////////////////
 ButtonBase::ButtonBase() :
 pos_mapped            (),
+pos_visual            (),
 textbox_id            (),
 selection_holder      (),
 activation_holder     (),
@@ -16,6 +17,7 @@ bounds                ()
 ////////////////////////////////////////////////////////////
 ButtonBase::ButtonBase(const SDL_Point& mapped, const SDL_Point& visual, const string& textbox) :
 pos_mapped            (mapped),
+pos_visual            (visual),
 textbox_id            (textbox),
 selection_holder      (),
 activation_holder     (),
@@ -55,6 +57,13 @@ void ButtonBase::checkCursor() {
     if (input::check_input(CONFIRM)) {
         callActivationFunctions();
     }
+}
+
+void ButtonBase::set_position(float x, float y) {
+    Drawable::set_position(x, y);
+    viewport.x = position.x + pos_visual.x;
+    viewport.x = position.y + pos_visual.y;
+    geometry_update_needed  = true;
 }
 
 ////////////////////////////////////////////////////////////

@@ -54,6 +54,8 @@ public:
     /// @brief Check if the cursor overlaps with this button
     virtual void checkCursor();
 
+    virtual void set_position(float x, float y);
+
     /// @brief get the bounds of the entity
     /// @return returns the bounds of the entity
     virtual SDL_FRect get_bounds();
@@ -89,6 +91,7 @@ public:
 public:
 	SDL_Point               pos_mapped;             ///< Position of the mapped button
 protected:
+	SDL_Point               pos_visual;             ///< Position of the visual button
     string                  textbox_id;             ///< id of the associated Textbox (if already set)
     FunctionHolder          selection_holder;       ///< Functions needed to be called when selected
     FunctionHolder          activation_holder;      ///< Functions needed to be called when activated
