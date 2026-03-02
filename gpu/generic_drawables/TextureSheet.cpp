@@ -80,9 +80,9 @@ void TextureSheet::init() {
         return;
     }
     if (graphics::texture_parts_map.count(*image_path) == 0) {
-        parts = new vector<SDL_FRect>();
-        parts->push_back(SDL_FRect{0, 0, viewport.w, viewport.h});
-        return;
+        vector<SDL_FRect> temp_parts;
+        temp_parts.push_back(SDL_FRect{0, 0, viewport.w, viewport.h});
+        graphics::texture_parts_map.insert({*image_path, temp_parts});
     }
     parts = &graphics::texture_parts_map.at(*image_path);
 }
