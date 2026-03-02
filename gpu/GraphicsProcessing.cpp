@@ -1,10 +1,4 @@
 #include "GraphicsProcessing.hpp"
-#include "GPUAccessables.hpp"
-#include "SDL3/SDL_gpu.h"
-#include "SDL3/SDL_surface.h"
-#include "SDL3_image/SDL_image.h"
-#include "TextureInit.hpp"
-#include <format>
 
 map<string*, Drawable*> GraphicsProcessing::screen_map;
 string GraphicsProcessing::texture_shader_map = "";
@@ -18,6 +12,9 @@ void GraphicsProcessing::add_screen(Drawable* screen, string* screen_id) {
     screen_map.insert({screen_id, screen});
 }
 Drawable* GraphicsProcessing::get_screen(string* screen_id) {
+    if (screen_map.count(screen_id) == 0) {
+        return nullptr;
+    }
     return screen_map.at(screen_id);
 }
 
