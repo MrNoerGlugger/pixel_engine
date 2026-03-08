@@ -33,7 +33,7 @@ std::string get_base_path(const char* shaderFilename) {
 }
 
 //#ifdef linux
-bool game::compile_shader(
+bool graphics::compile_shader(
     SDL_GPUDevice* device,
 	const char* base_path,
     const char* shaderFilename,
@@ -141,7 +141,7 @@ bool game::compile_shader(
 }
 //#endif
 
-SDL_GPUShader* game::load_shader(
+SDL_GPUShader* graphics::load_shader(
     SDL_GPUDevice* device,
     const char* shaderFilename,
     Uint32 samplerCount,

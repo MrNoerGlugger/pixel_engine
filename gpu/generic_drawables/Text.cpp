@@ -31,13 +31,13 @@ void Text::create_graphics_pipeline() {
     }
 
     // Create the shaders
-	SDL_GPUShader* vertexShader = game::load_shader(graphics::device, "ColoredTexture.vert", 0, 1, 0, 0);
+	SDL_GPUShader* vertexShader = graphics::load_shader(graphics::device, "ColoredTexture.vert", 0, 1, 0, 0);
 	if (vertexShader == NULL)
 	{
 		SDL_Log("Failed to create vertex shader!");
 		return;
 	}
-	SDL_GPUShader* fragmentShader = game::load_shader(graphics::device, "TexturedColoredQuad.frag", 1, 0, 0, 0);
+	SDL_GPUShader* fragmentShader = graphics::load_shader(graphics::device, "TexturedColoredQuad.frag", 1, 0, 0, 0);
 	if (fragmentShader == NULL)
 	{
 		SDL_Log("Failed to create fragment shader!");

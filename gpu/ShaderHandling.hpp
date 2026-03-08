@@ -5,7 +5,7 @@
 #include <SDL3/SDL.h>
 #include <SDL3_shadercross/SDL_shadercross.h>
 
-namespace game {
+namespace graphics {
 //#ifdef linux
     extern bool compile_shader(
         SDL_GPUDevice* device,
