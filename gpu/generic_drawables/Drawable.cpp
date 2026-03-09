@@ -7,10 +7,7 @@ void Drawable::set_position(float x, float y) {
     viewport.y = position.y;
 }
 void Drawable::move(float x, float y) {
-    position.x += x;
-    position.y += y;
-    viewport.x = position.x;
-    viewport.y = position.y;
+    this->set_position(position.x + x, position.y + y);
 }
 void Drawable::set_scale(float x, float y) {
     scale.x = x;
