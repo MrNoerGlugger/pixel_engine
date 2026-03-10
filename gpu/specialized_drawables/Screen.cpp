@@ -35,9 +35,9 @@ void Screen::check_textboxes() {
 }
 
 SDL_FRect Screen::get_bounds() {
-    float x_min;
+    float x_min = 0.f;
     float x_max;
-    float y_min;
+    float y_min = 0.f;
     float y_max;
     bool start_value_set = false;
     for (auto drawable_pair : drawable_default_map) {

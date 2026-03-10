@@ -14,8 +14,6 @@ using std::map;
 using std::pair;
 using std::string;
 
-#define SCREEN_WIDTH    480
-#define SCREEN_HEIGHT   270
 
 typedef enum draw_stage {
     DEFAULT,
@@ -41,6 +39,9 @@ namespace graphics {
     extern SDL_GPUCommandBuffer* cmdbuf;
     extern SDL_GPURenderPass* render_pass;
     extern string pipeline_id;
+
+    extern unsigned int SCREEN_WIDTH;
+    extern unsigned int SCREEN_HEIGHT;
 
     extern string shadow_map_path;
     extern int gpu_target_texture_amount;

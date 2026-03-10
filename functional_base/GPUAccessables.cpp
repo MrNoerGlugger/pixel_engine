@@ -7,6 +7,9 @@ SDL_GPUCommandBuffer* graphics::cmdbuf;
 SDL_GPURenderPass* graphics::render_pass;
 string graphics::pipeline_id = "";
 
+unsigned int graphics::SCREEN_WIDTH  = 480;
+unsigned int graphics::SCREEN_HEIGHT = 270;
+
 string graphics::shadow_map_path = "";
 int graphics::gpu_target_texture_amount = 0;
 string* graphics::current_screen = nullptr;

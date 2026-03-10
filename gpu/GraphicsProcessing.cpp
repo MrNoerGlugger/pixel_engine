@@ -24,8 +24,8 @@ void GraphicsProcessing::interpret_window_scale() {
     int window_width = 1;
     int window_height = 1;
     SDL_GetWindowSize(graphics::window, &window_width, &window_height);
-    graphics::zoom[0] = 1.f * window_width / SCREEN_WIDTH;
-    graphics::zoom[1] = 1.f * window_height / SCREEN_HEIGHT;
+    graphics::zoom[0] = 1.f * window_width / graphics::SCREEN_WIDTH;
+    graphics::zoom[1] = 1.f * window_height / graphics::SCREEN_HEIGHT;
     float general_zoom = graphics::zoom[0] > graphics::zoom[1] ? graphics::zoom[1] : graphics::zoom[0];
     graphics::window_scale[0] = graphics::zoom[0] / general_zoom;
     graphics::window_scale[1] = graphics::zoom[1] / general_zoom;
@@ -43,8 +43,8 @@ void GraphicsProcessing::resize_textures() {
         shader_map.set_image_path(&texture_shader_map);
         texture_main.set_image_path(&texture_main_target);
     }
-    int current_window_width = (int)(SCREEN_WIDTH * graphics::window_scale[0]);
-    int current_window_height = (int)(SCREEN_HEIGHT * graphics::window_scale[1]);
+    int current_window_width = (int)(graphics::SCREEN_WIDTH * graphics::window_scale[0]);
+    int current_window_height = (int)(graphics::SCREEN_HEIGHT * graphics::window_scale[1]);
     if (current_window_width != graphics::get_texture(texture_overlay_target, false).second.x || current_window_height != graphics::get_texture(texture_overlay_target, false).second.y) {
         graphics::register_target_texture(current_window_width, current_window_height, texture_overlay_target);
         texture_overlay.set_image_path(&texture_overlay_target);
