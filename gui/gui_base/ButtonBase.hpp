@@ -17,7 +17,7 @@ public:
     /// @param mapped mapped Position(for textbox controls)
     /// @param visual visual Position (for on-screen positioning)
     /// @param textbox textbox id
-    ButtonBase(SDL_Point& mapped, SDL_Point& visual);
+    ButtonBase(SDL_Point mapped, SDL_Point visual);
 
 
     /// @brief Store functions to call on the selection event

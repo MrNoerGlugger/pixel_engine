@@ -14,7 +14,7 @@ bounds                ()
 }
 
 ////////////////////////////////////////////////////////////
-ButtonBase::ButtonBase(SDL_Point& mapped, SDL_Point& visual) :
+ButtonBase::ButtonBase(SDL_Point mapped, SDL_Point visual) :
 pos_mapped            (mapped),
 pos_visual            (visual),
 selection_holder      (),

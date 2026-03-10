@@ -21,7 +21,7 @@ public:
     /// and a string(as a textbox id)
     ///
     ////////////////////////////////////////////////////////////
-    ButtonText(string& text, SDL_Point& mapped, SDL_Point& visual);
+    ButtonText(string text, SDL_Point mapped, SDL_Point visual);
 
     ////////////////////////////////////////////////////////////
     /// \brief Draw the button to a render target

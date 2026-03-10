@@ -11,7 +11,7 @@ ButtonText::ButtonBase()
 
 
 ////////////////////////////////////////////////////////////
-ButtonText::ButtonText(string& text, SDL_Point& mapped, SDL_Point& visual) :
+ButtonText::ButtonText(string text, SDL_Point mapped, SDL_Point visual) :
 text                  (Text(text)),
 text_selected         (Text(">" + text)),
 ButtonText::ButtonBase(mapped, visual)
