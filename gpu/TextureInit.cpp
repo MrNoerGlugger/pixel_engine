@@ -7,12 +7,12 @@ void graphics::register_texture(string path) {
     }
 
     SDL_Surface* imageData = IMG_Load(path.c_str());
-    imageData->format = SDL_PIXELFORMAT_RGBA32;
     if (imageData == NULL) 
     {
         SDL_Log("Could not load image data!");
         return;
     }
+    imageData->format = SDL_PIXELFORMAT_RGBA32;
     
     SDL_GPUTextureCreateInfo textureCreateInfo = SDL_GPUTextureCreateInfo {
         SDL_GPU_TEXTURETYPE_2D,
@@ -81,12 +81,12 @@ void graphics::register_shader_texture(string path) {
     }
 
     SDL_Surface* imageData = IMG_Load(path.c_str());
-    imageData->format = SDL_PIXELFORMAT_RGBA32;
     if (imageData == NULL) 
     {
         Logger::log_error("Could not load image data!");
         return;
     }
+    imageData->format = SDL_PIXELFORMAT_RGBA32;
     
     SDL_GPUTextureCreateInfo textureCreateInfo = SDL_GPUTextureCreateInfo {
         SDL_GPU_TEXTURETYPE_2D,
