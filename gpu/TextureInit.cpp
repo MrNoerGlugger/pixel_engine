@@ -9,7 +9,7 @@ void graphics::register_texture(string path) {
     SDL_Surface* imageData = IMG_Load(path.c_str());
     if (imageData == NULL) 
     {
-        SDL_Log("Could not load image data!");
+        Logger::log_error(std::format("Could not load image data for {}!", path));
         return;
     }
     imageData->format = SDL_PIXELFORMAT_RGBA32;
@@ -83,7 +83,7 @@ void graphics::register_shader_texture(string path) {
     SDL_Surface* imageData = IMG_Load(path.c_str());
     if (imageData == NULL) 
     {
-        Logger::log_error("Could not load image data!");
+        Logger::log_error(std::format("Could not load image data for {}!", path));
         return;
     }
     imageData->format = SDL_PIXELFORMAT_RGBA32;
@@ -117,7 +117,7 @@ void graphics::register_shader_texture(string path) {
     Uint8* textureTransferPointer = (Uint8*)SDL_MapGPUTransferBuffer(graphics::device, textureTransferBuffer, false);
 
     if (imageData->pixels == NULL) {
-        Logger::log_error("Failed to open the pixel-data!");
+        Logger::log_error(std::format("Failed to open the pixel-data for {}!", path));
         return;
     }
 
