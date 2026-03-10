@@ -24,7 +24,7 @@ class GraphicsProcessing {
     static Texture texture_overlay;
     static ShaderMap shader_map;
 
-
+    static SDL_FColor shader_standard_clear_color;
 public:
 //pre-processing steps
     //adds a screen to the screen_map

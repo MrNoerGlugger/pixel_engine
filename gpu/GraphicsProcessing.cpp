@@ -8,6 +8,8 @@ Texture GraphicsProcessing::texture_main = Texture();
 Texture GraphicsProcessing::texture_overlay = Texture();
 ShaderMap GraphicsProcessing::shader_map = ShaderMap();
 
+SDL_FColor GraphicsProcessing::shader_standard_clear_color = {0.25f, 0.25f, 0.25f, 1.f};
+
 void GraphicsProcessing::add_screen(Screen* screen, string* screen_id) {
     screen_map.insert({screen_id, screen});
 }
@@ -50,6 +52,8 @@ void GraphicsProcessing::resize_textures() {
 }
 
 void GraphicsProcessing::init() {
+    graphics::shader_clear_color = &shader_standard_clear_color;
+
     graphics::shadow_map_path   = graphics::register_target_texture(0, 0, graphics::shadow_map_path);
     texture_shader_map          = graphics::register_target_texture(0, 0, texture_shader_map       );
     texture_main_target         = graphics::register_target_texture(0, 0, texture_main_target      );
@@ -222,9 +226,7 @@ void GraphicsProcessing::draw_light_phase() {
     }
     SDL_GPUColorTargetInfo colorTargetInfo = {  
         .texture = graphics::get_texture(texture_shader_map, false).first,
-        .clear_color = SDL_FColor(0.25f, 0.25f, 0.25f, 1.f),
-        // .clear_color = SDL_FColor(0.5f, 0.5f, 0.5f, 1.f),
-        // .clear_color = SDL_FColor(0.f, 0.f, 0.f, 0.f),
+        .clear_color = *graphics::shader_clear_color,
         .load_op = SDL_GPU_LOADOP_CLEAR,
         .store_op = SDL_GPU_STOREOP_STORE
     };
@@ -275,7 +277,7 @@ void GraphicsProcessing::draw_overlay_phase() {
     }
     SDL_GPUColorTargetInfo colorTargetInfo = {
         .texture = graphics::get_texture(texture_overlay_target, false).first,
-        .clear_color = SDL_FColor(0.0f, 0.0f, 0.0f, 1.0f),
+        .clear_color = SDL_FColor(0.0f, 0.0f, 0.0f, 0.0f),
         .load_op = SDL_GPU_LOADOP_CLEAR,
         .store_op = SDL_GPU_STOREOP_STORE
     };
