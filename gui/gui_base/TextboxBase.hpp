@@ -6,24 +6,27 @@ extern const bool in_debug_mode;
 
 class TextboxBase : public Drawable
 {
+protected:
+    string                  textbox_id;         ///< id of the Textbox (if already set)
+    bool                    interactable;       ///< Can the Textbox be interacted with?
+    bool                    displayed;          ///< Is the Textbox currently displayed on screen?
+    vector<ButtonBase*>     buttons;            ///< Buttons included in the Textbox
+    bool                    selected;           ///< Is this textbox currently selected?
+    bool                    focus;              ///< Is the Textbox in focus?
+    SDL_FRect               bounds;             ///< Bounding rectangle of the textbox (in local coordinates)
+    Rectangle               bounding_box;       ///< Bounding Box as a Drawable for bugfixing
+
 public:
-    ////////////////////////////////////////////////////////////
     /// \brief Default Constructor
-    ///
     /// Creates empty Textbox
-    ///
-    ////////////////////////////////////////////////////////////
     TextboxBase();
 
-    ////////////////////////////////////////////////////////////
     /// \brief Construct from a Button vector, a Position, a string & a bool
     ///
     /// Creates a Textbox with a boolean(can the textbox be
     /// interacted with), a Button vector(as the
     /// integrated Buttons), a visual Position and a textbox id string
-    ///
-    ////////////////////////////////////////////////////////////
-    TextboxBase(vector<ButtonBase*> buttons, const SDL_Point& visual, string textbox_id, bool interactable);
+    TextboxBase(vector<ButtonBase*> buttons, SDL_Point& visual, string textbox_id, bool interactable);
 
     /// Sets whether the Textbox should be displayed or not
     void set_displayed(bool displayed);
@@ -58,7 +61,7 @@ public:
  
 protected:
     /// @brief create a textbox bounding box for debug purposes
-    void createBoundingBox() const;
+    void createBoundingBox();
 
     /// @brief Make sure the text's geometry is updated
     ///
@@ -69,12 +72,4 @@ protected:
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    string                  textbox_id;         ///< id of the Textbox (if already set)
-    bool                    interactable;       ///< Can the Textbox be interacted with?
-    bool                    displayed;          ///< Is the Textbox currently displayed on screen?
-    vector<ButtonBase*>     buttons;            ///< Buttons included in the Textbox
-    mutable bool            selected;           ///< Is this textbox currently selected?
-    mutable bool            focus;              ///< Is the Textbox in focus?
-    mutable SDL_FRect       bounds;             ///< Bounding rectangle of the textbox (in local coordinates)
-    mutable Rectangle       bounding_box;       ///< Bounding Box as a Drawable for bugfixing
 };

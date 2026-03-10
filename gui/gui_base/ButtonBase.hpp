@@ -17,7 +17,7 @@ public:
     /// @param mapped mapped Position(for textbox controls)
     /// @param visual visual Position (for on-screen positioning)
     /// @param textbox textbox id
-    ButtonBase(const SDL_Point& mapped, const SDL_Point& visual, const string& textbox);
+    ButtonBase(SDL_Point& mapped, SDL_Point& visual);
 
 
     /// @brief Store functions to call on the selection event
@@ -66,7 +66,7 @@ public:
 
 protected:
     /// @brief create a button bounding box for debug purposes
-    void createBoundingBox() const;
+    void createBoundingBox();
 
 
     /// @brief Make sure the button's geometry is updated
@@ -77,12 +77,12 @@ protected:
 
 
     /// @brief Call all functions for the selection event
-    void callSelectionFunctions() const;
+    void callSelectionFunctions();
 
 
 public:
     /// @brief Call all functions for the activation event
-    void callActivationFunctions() const;
+    void callActivationFunctions();
 
     
     ////////////////////////////////////////////////////////////
@@ -92,7 +92,6 @@ public:
 	SDL_Point               pos_mapped;             ///< Position of the mapped button
 protected:
 	SDL_Point               pos_visual;             ///< Position of the visual button
-    string                  textbox_id;             ///< id of the associated Textbox (if already set)
     FunctionHolder          selection_holder;       ///< Functions needed to be called when selected
     FunctionHolder          activation_holder;      ///< Functions needed to be called when activated
     mutable bool            selected;               ///< Is this button currently selected?

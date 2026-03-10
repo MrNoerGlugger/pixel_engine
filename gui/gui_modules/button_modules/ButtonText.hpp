@@ -21,7 +21,7 @@ public:
     /// and a string(as a textbox id)
     ///
     ////////////////////////////////////////////////////////////
-    ButtonText(const string& text, const SDL_Point& mapped, const SDL_Point& visual, const string& textbox);
+    ButtonText(string& text, SDL_Point& mapped, SDL_Point& visual);
 
     ////////////////////////////////////////////////////////////
     /// \brief Draw the button to a render target

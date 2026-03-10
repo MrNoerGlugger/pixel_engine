@@ -5,7 +5,6 @@
 ButtonBase::ButtonBase() :
 pos_mapped            (),
 pos_visual            (),
-textbox_id            (),
 selection_holder      (),
 activation_holder     (),
 selected              (false),
@@ -15,10 +14,9 @@ bounds                ()
 }
 
 ////////////////////////////////////////////////////////////
-ButtonBase::ButtonBase(const SDL_Point& mapped, const SDL_Point& visual, const string& textbox) :
+ButtonBase::ButtonBase(SDL_Point& mapped, SDL_Point& visual) :
 pos_mapped            (mapped),
 pos_visual            (visual),
-textbox_id            (textbox),
 selection_holder      (),
 activation_holder     (),
 selected              (false),
@@ -29,12 +27,12 @@ bounds                ()
 
 
 ////////////////////////////////////////////////////////////
-void ButtonBase::callSelectionFunctions() const {
+void ButtonBase::callSelectionFunctions() {
     selection_holder.callAll();
 }
 
 ////////////////////////////////////////////////////////////
-void ButtonBase::callActivationFunctions() const {
+void ButtonBase::callActivationFunctions() {
     activation_holder.callAll();
 }
 
@@ -75,7 +73,7 @@ SDL_FRect ButtonBase::get_bounds()
 
 
 ////////////////////////////////////////////////////////////
-void ButtonBase::createBoundingBox() const {
+void ButtonBase::createBoundingBox() {
     if (!in_debug_mode) return;
 
     //print out the bounds to console

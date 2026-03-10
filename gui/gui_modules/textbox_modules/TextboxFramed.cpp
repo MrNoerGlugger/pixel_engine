@@ -16,7 +16,7 @@ TextboxFramed::TextboxBase  ()
 
 
 ////////////////////////////////////////////////////////////
-TextboxFramed::TextboxFramed(vector<ButtonBase*> buttons, const SDL_Point& pos_visual, string textbox_id, bool interactable) :
+TextboxFramed::TextboxFramed(vector<ButtonBase*> buttons, SDL_Point& pos_visual, string textbox_id, bool interactable) :
 corners						(nullptr),
 edges						(nullptr),
 texture_size                ({0, 0}),
@@ -30,7 +30,7 @@ TextboxFramed::TextboxBase  (buttons, pos_visual, textbox_id, interactable)
 
 
 ////////////////////////////////////////////////////////////
-TextboxFramed::TextboxFramed(const SDL_Point& size, vector<ButtonBase*> buttons, const SDL_Point& pos_visual, string textbox_id, bool interactable) :
+TextboxFramed::TextboxFramed(SDL_Point& size, vector<ButtonBase*> buttons, SDL_Point& pos_visual, string textbox_id, bool interactable) :
 corners						(nullptr),
 edges						(nullptr),
 texture_size                ({0, 0}),
@@ -55,7 +55,7 @@ void TextboxFramed::set_image_paths(std::string* corners, std::string* edges) {
 }
 
 
-void TextboxFramed::createTextboxFrame(const SDL_Point& size) const 
+void TextboxFramed::createTextboxFrame(SDL_Point& size) 
 {
 	frame_parts.clear();
     SDL_FPoint base_pos{position.x, position.y};

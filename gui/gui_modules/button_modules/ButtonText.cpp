@@ -11,10 +11,10 @@ ButtonText::ButtonBase()
 
 
 ////////////////////////////////////////////////////////////
-ButtonText::ButtonText(const string& text, const SDL_Point& mapped, const SDL_Point& visual, const string& textbox) :
+ButtonText::ButtonText(string& text, SDL_Point& mapped, SDL_Point& visual) :
 text                  (Text(text)),
 text_selected         (Text(">" + text)),
-ButtonText::ButtonBase(mapped, visual, textbox)
+ButtonText::ButtonBase(mapped, visual)
 {
     geometry_update_needed = true;
 }

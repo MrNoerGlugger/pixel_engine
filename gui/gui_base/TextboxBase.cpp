@@ -16,7 +16,7 @@ bounding_box          ()
 
 
 ////////////////////////////////////////////////////////////
-TextboxBase::TextboxBase(vector<ButtonBase*> buttons, const SDL_Point& visual, string textbox_id, bool interactable):
+TextboxBase::TextboxBase(vector<ButtonBase*> buttons, SDL_Point& visual, string textbox_id, bool interactable):
 textbox_id            (textbox_id),
 interactable          (interactable),
 displayed             (false),
@@ -69,7 +69,7 @@ SDL_FRect TextboxBase::get_bounds()
 }
 
 ////////////////////////////////////////////////////////////
-void TextboxBase::createBoundingBox() const {
+void TextboxBase::createBoundingBox() {
     if (!in_debug_mode) return;
 
     //print out the bounds to console
