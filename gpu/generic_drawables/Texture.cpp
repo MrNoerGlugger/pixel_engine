@@ -129,10 +129,14 @@ void Texture::draw() {
     graphics::bind_graphics_pipeline(pipeline, pipeline_id);
 
     SDL_GPUViewport scaled_viewport = viewport;
+    float remainder_rotation = (std::sqrtf(2.f) - 1.f);
+    float mult_rotation = remainder_rotation + 1.f;
+    scaled_viewport.x -= remainder_rotation / 2.f * scaled_viewport.w;
     scaled_viewport.x *= graphics::zoom[0];
-    scaled_viewport.w *= graphics::zoom[0] * scale.x;
+    scaled_viewport.w *= graphics::zoom[0] * scale.x * mult_rotation;
+    scaled_viewport.y -= remainder_rotation / 2.f * scaled_viewport.h;
     scaled_viewport.y *= graphics::zoom[1];
-    scaled_viewport.h *= graphics::zoom[1] * scale.y;
+    scaled_viewport.h *= graphics::zoom[1] * scale.y * mult_rotation;
 
     SDL_SetGPUViewport(graphics::render_pass, &scaled_viewport);
 

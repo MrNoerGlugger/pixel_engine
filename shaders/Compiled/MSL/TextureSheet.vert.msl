@@ -22,89 +22,89 @@ struct main0_out
 vertex main0_out main0(constant type_TextureCoords& TextureCoords [[buffer(0)]], uint gl_VertexIndex [[vertex_id]])
 {
     main0_out out = {};
-    float _46 = (TextureCoords.rotation - 45.0) * 0.0174532942473888397216796875;
-    bool _50 = !(TextureCoords.mirroring == 2.0);
-    bool _54;
-    if (_50)
+    float _45 = (TextureCoords.rotation - 45.0) * 0.0174532942473888397216796875;
+    bool _49 = !(TextureCoords.mirroring == 2.0);
+    bool _53;
+    if (_49)
     {
-        _54 = TextureCoords.mirroring == 3.0;
+        _53 = TextureCoords.mirroring == 3.0;
     }
     else
     {
-        _54 = true;
+        _53 = true;
     }
-    float _62;
-    if (_54)
+    float _61;
+    if (_53)
     {
-        _62 = TextureCoords.texture_coords.z;
+        _61 = TextureCoords.texture_coords.z;
     }
     else
     {
-        _62 = TextureCoords.texture_coords.x;
+        _61 = TextureCoords.texture_coords.x;
     }
-    bool _64 = !(TextureCoords.mirroring == 1.0);
-    bool _68;
-    if (_64)
+    bool _63 = !(TextureCoords.mirroring == 1.0);
+    bool _67;
+    if (_63)
     {
-        _68 = TextureCoords.mirroring == 3.0;
+        _67 = TextureCoords.mirroring == 3.0;
     }
     else
     {
-        _68 = true;
+        _67 = true;
     }
-    float _76;
-    if (_68)
+    float _75;
+    if (_67)
     {
-        _76 = TextureCoords.texture_coords.w;
+        _75 = TextureCoords.texture_coords.w;
     }
     else
     {
-        _76 = TextureCoords.texture_coords.y;
+        _75 = TextureCoords.texture_coords.y;
     }
-    bool _80;
-    if (_50)
+    bool _79;
+    if (_49)
     {
-        _80 = TextureCoords.mirroring == 3.0;
+        _79 = TextureCoords.mirroring == 3.0;
     }
     else
     {
-        _80 = true;
+        _79 = true;
     }
-    float _88;
-    if (_80)
+    float _87;
+    if (_79)
     {
-        _88 = TextureCoords.texture_coords.x;
+        _87 = TextureCoords.texture_coords.x;
     }
     else
     {
-        _88 = TextureCoords.texture_coords.z;
+        _87 = TextureCoords.texture_coords.z;
     }
-    bool _92;
-    if (_64)
+    bool _91;
+    if (_63)
     {
-        _92 = TextureCoords.mirroring == 3.0;
+        _91 = TextureCoords.mirroring == 3.0;
     }
     else
     {
-        _92 = true;
+        _91 = true;
     }
-    float _100;
-    if (_92)
+    float _99;
+    if (_91)
     {
-        _100 = TextureCoords.texture_coords.y;
+        _99 = TextureCoords.texture_coords.y;
     }
     else
     {
-        _100 = TextureCoords.texture_coords.w;
+        _99 = TextureCoords.texture_coords.w;
     }
-    float2 _135;
-    float4 _136;
+    float2 _126;
+    float4 _127;
     switch (gl_VertexIndex)
     {
         case 0u:
         {
-            _135 = float2(_62, _76);
-            _136 = float4(1.41421353816986083984375 * sin(_46), 1.41421353816986083984375 * cos(_46), 0.0, 1.0);
+            _126 = float2(_61, _75);
+            _127 = float4(sin(_45), cos(_45), 0.0, 1.0);
             break;
         }
         case 1u:
@@ -112,9 +112,9 @@ vertex main0_out main0(constant type_TextureCoords& TextureCoords [[buffer(0)]],
         }
         case 3u:
         {
-            float _114 = _46 + 1.57079637050628662109375;
-            _135 = float2(_88, _76);
-            _136 = float4(1.41421353816986083984375 * sin(_114), 1.41421353816986083984375 * cos(_114), 0.0, 1.0);
+            float _111 = _45 + 1.57079637050628662109375;
+            _126 = float2(_87, _75);
+            _127 = float4(sin(_111), cos(_111), 0.0, 1.0);
             break;
         }
         case 2u:
@@ -122,27 +122,27 @@ vertex main0_out main0(constant type_TextureCoords& TextureCoords [[buffer(0)]],
         }
         case 4u:
         {
-            float _121 = _46 + 4.7123889923095703125;
-            _135 = float2(_62, _100);
-            _136 = float4(1.41421353816986083984375 * sin(_121), 1.41421353816986083984375 * cos(_121), 0.0, 1.0);
+            float _116 = _45 + 4.7123889923095703125;
+            _126 = float2(_61, _99);
+            _127 = float4(sin(_116), cos(_116), 0.0, 1.0);
             break;
         }
         case 5u:
         {
-            float _128 = _46 + 3.1415927410125732421875;
-            _135 = float2(_88, _100);
-            _136 = float4(1.41421353816986083984375 * sin(_128), 1.41421353816986083984375 * cos(_128), 0.0, 1.0);
+            float _121 = _45 + 3.1415927410125732421875;
+            _126 = float2(_87, _99);
+            _127 = float4(sin(_121), cos(_121), 0.0, 1.0);
             break;
         }
         default:
         {
-            _135 = _36;
-            _136 = _35;
+            _126 = _36;
+            _127 = _35;
             break;
         }
     }
-    out.out_var_TEXCOORD0 = _135;
-    out.gl_Position = _136;
+    out.out_var_TEXCOORD0 = _126;
+    out.gl_Position = _127;
     return out;
 }
 

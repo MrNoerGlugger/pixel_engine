@@ -20,7 +20,7 @@ Output main(Input input)
     float4 pos;
 
     const float PI = 3.14159265f;
-    float r = sqrt(2);
+    float r = 1.f;
     float alpha = PI * ((rotation - 45.f) / 180.f);
 
     switch (input.VertexIndex) {
