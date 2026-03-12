@@ -97,6 +97,9 @@ void Rectangle::init() {
 }
 
 void Rectangle::draw() {
+    if (graphics::draw_stage != DEFAULT && graphics::draw_stage != OVERLAY) {
+        return;
+    }
     graphics::bind_graphics_pipeline(pipeline, pipeline_id);
 
     SDL_GPUViewport scaled_viewport = viewport;
