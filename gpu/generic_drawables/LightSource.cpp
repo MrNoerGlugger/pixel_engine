@@ -33,9 +33,9 @@ void LightSource::set_origin(SDL_Point origin) {
             starting_rotation = 360.f - starting_rotation;
         }
 
-        float alpha = PI * ((rotation + (mirroring == 3 * 180.f) + (360.f - starting_rotation)) / 180.f);
+        float alpha = PI * ((rotation + (mirroring == 3 * 180.f) + starting_rotation) / 180.f);
         origin_transformed.x = r * sin(alpha) + texture_size.x / 2.f;
-        origin_transformed.y = r * cos(alpha) + texture_size.y / 2.f;
+        origin_transformed.y = texture_size.y - (r * cos(alpha) + texture_size.y / 2.f);
         Logger::log_debug(std::format("this is the starting rotation: {} and this is the alpha: {}", starting_rotation, alpha));
     }
     
