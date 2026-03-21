@@ -33,16 +33,16 @@ void LightSource::set_origin(SDL_Point origin) {
             starting_rotation = 360.f - starting_rotation;
         }
 
-        float alpha = PI * ((rotation + (mirroring == 3 * 180.f) + starting_rotation) / 180.f);
+        float alpha = PI * ((rotation + ((mirroring == BOTH) * 180.f) + starting_rotation) / 180.f);
         origin_transformed.x = r * sin(alpha) + texture_size.x / 2.f;
         origin_transformed.y = texture_size.y - (r * cos(alpha) + texture_size.y / 2.f);
         Logger::log_debug(std::format("this is the starting rotation: {} and this is the alpha: {}", starting_rotation, alpha));
     }
     
-    if (mirroring == 1) {
+    if (mirroring == VERTICAL) {
         origin_transformed.y = texture_size.y - origin_transformed.y;
     }
-    if (mirroring == 2) {
+    if (mirroring == HORIZONTAL) {
         origin_transformed.x = texture_size.x - origin_transformed.x;
     }
 
