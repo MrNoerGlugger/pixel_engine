@@ -30,7 +30,7 @@ public:
     virtual void set_rotation(float rotation);
 
     //set the mirroring of the lightsource (see more: TextureSheet.hpp)
-    virtual void set_mirroring(float mirroring);
+    virtual void set_mirroring(Mirroring mirroring);
 
     virtual void create_graphics_pipeline();
 

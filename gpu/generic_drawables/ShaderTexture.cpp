@@ -15,7 +15,7 @@ void ShaderTexture::set_part(int part) {
     TextureSheet::set_part(part);
     texture_default.set_part(part);
 }
-void ShaderTexture::set_mirroring(float mirroring) {
+void ShaderTexture::set_mirroring(Mirroring mirroring) {
     TextureSheet::set_mirroring(mirroring);
     texture_default.set_mirroring(mirroring);
     for (auto source : sources) {

@@ -76,7 +76,7 @@ void LightSource::set_rotation(float rotation) {
     set_origin(this->origin);
 }
 
-void LightSource::set_mirroring(float mirroring) {
+void LightSource::set_mirroring(Mirroring mirroring) {
     TextureSheet::set_mirroring(mirroring);
     //to set the correct position we set the origin again
     set_origin(this->origin);

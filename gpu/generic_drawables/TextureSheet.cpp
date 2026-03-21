@@ -6,7 +6,7 @@ TextureSheet::TextureSheet() {}
 void TextureSheet::set_part(int part) {
     this->part = part;
 }
-void TextureSheet::set_mirroring(float mirroring) {
+void TextureSheet::set_mirroring(Mirroring mirroring) {
     this->mirroring = mirroring;
 }
 void TextureSheet::set_color_multiplier(float color_mult) {
@@ -110,7 +110,7 @@ void TextureSheet::draw() {
 
     SDL_PushGPUFragmentUniformData(graphics::cmdbuf, 0, &color_mult, sizeof(color_mult));
     float part_data[6]{(*parts)[part].x / viewport.w, (*parts)[part].y / viewport.h, ((*parts)[part].x + (*parts)[part].w) / viewport.w, ((*parts)[part].y + (*parts)[part].h) / viewport.h, 
-        rotation, mirroring};
+        rotation, (float)mirroring};
     SDL_PushGPUVertexUniformData(graphics::cmdbuf, 0, &part_data, sizeof(part_data));
 
     SDL_GPUTextureSamplerBinding samplerBinding = SDL_GPUTextureSamplerBinding{ .texture = textureData.first, .sampler = sampler };

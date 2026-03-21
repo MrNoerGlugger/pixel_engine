@@ -22,6 +22,13 @@ typedef enum draw_stage {
     OVERLAY
 } DrawStage;
 
+typedef enum mirroring {
+    NONE,
+    VERTICAL,
+    HORIZONTAL,
+    BOTH
+} Mirroring;
+
 typedef struct lightsource_data {
     SDL_Point origin;
     Uint32 lightsource_color;

@@ -24,7 +24,7 @@ public:
 
     /// @brief sets the mirror mode for the texturesheet;   override of the base function
     /// @param mirroring the selected mirror mode (0 = none, 1 = horizontal, 2 = vertical, 3 = both)
-    virtual void set_mirroring(float mirroring);
+    virtual void set_mirroring(Mirroring mirroring);
 
     virtual void set_rotation(float rotation);
 
