@@ -50,7 +50,7 @@ typedef enum ButtonState {
 
 struct Input {
     InputData data;
-    ButtonState state;
+    ButtonState state = EVENT_NONE;
     ButtonState activation_state = EVENT_NONE;
     int repeat_delay = -1;
     int repeat_delay_start = -1;
