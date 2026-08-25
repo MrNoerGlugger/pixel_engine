@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
-project(PixelEngine LANGUAGES CXX)
+project(NoerEngine LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -12,10 +12,10 @@ if (LINUX)
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra -pedantic")
 endif()
 
-add_subdirectory(functional_base)
-add_subdirectory(gpu)
-add_subdirectory(gui)
-add_subdirectory(input)
+add_subdirectory(src/functional_base)
+add_subdirectory(src/gpu)
+add_subdirectory(src/gui)
+add_subdirectory(src/input)
 
 
 include(FetchContent)
@@ -67,17 +67,27 @@ add_library(compiler_flags INTERFACE)
 target_compile_features(compiler_flags INTERFACE cxx_std_20)
 target_compile_definitions(compiler_flags INTERFACE SRC_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
 
-add_library(pixel_engine STATIC
-    Engine.cpp
-    Engine.hpp
+add_library(noer_engine STATIC
+    src/Engine.cpp
+    src/Engine.hpp
 )
 
-target_include_directories(pixel_engine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(noer_engine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
-target_link_libraries(pixel_engine PUBLIC functional_base gpu gui input sdl_all compiler_flags)
+target_link_libraries(noer_engine PUBLIC functional_base gpu gui input sdl_all compiler_flags)
 
-add_custom_command(
-    TARGET pixel_engine
-    COMMENT "Copy shaders folder"
-    PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/shaders $<TARGET_FILE_DIR:pixel_engine>/resources/shaders
-)
+set(BUILD_NOER_TESTS ON)
+if(BUILD_NOER_TESTS)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+    list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+    
+    add_executable(noer_engine_tests src/main.cpp)
+
+    target_link_libraries(noer_engine_tests PUBLIC noer_engine compiler_flags)
+
+    add_custom_command(
+        TARGET noer_engine_tests
+        COMMENT "Copy shaders folder"
+        PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/shaders $<TARGET_FILE_DIR:noer_engine_tests>/resources/shaders
+    )
+endif()

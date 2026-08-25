@@ -38,7 +38,7 @@ void FilePath::createFilePath() {
 		std::filesystem::create_directory(filePath);
 
 	//check "NoerGames"
-	filePath += "/PixelEngine";
+	filePath += "/NoerEngine";
  	if (!std::filesystem::exists(filePath))
 		std::filesystem::create_directory(filePath);
 
@@ -54,7 +54,7 @@ void FilePath::createFilePath() {
 	filePath += homedir;
 
 	//check .noer-games folder
-	filePath += "/.pixel-engine/";
+	filePath += "/.noer-engine/";
 
  	if (!std::filesystem::exists(filePath))
 		std::filesystem::create_directory(filePath);

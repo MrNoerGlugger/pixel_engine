@@ -21,4 +21,4 @@ add_library(generic_drawables STATIC
 
 target_include_directories(generic_drawables PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_link_libraries(generic_drawables PUBLIC shader_handling textures functional_base)
+target_link_libraries(generic_drawables PUBLIC shader_handling functional_base)
